@@ -1,0 +1,120 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-bg: #0b0d10;
+  --color-surface: #14181e;
+  --color-elevated: #1b2129;
+  --color-fg: #eef1f4;
+  --color-muted: #8a939e;
+  --color-subtle: #6a7380;
+  --color-line: #ffffff14;
+  --color-accent: #8fbfa8;
+  --color-accent-dim: #8fbfa822;
+  --color-danger: #d67a72;
+  --color-primary: #d4d8de;
+  --color-primary-fg: #0b0d10;
+  --color-ring: #8fbfa866;
+  --color-background: #0b0d10;
+  --color-foreground: #eef1f4;
+  --color-border: #ffffff14;
+  --color-card: #14181e;
+  --color-popover: #14181e;
+
+  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --text-2xs: 0.6875rem;
+  --text-micro: 0.625rem;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius: 12px;
+
+  --shadow-panel: 0 0 0 1px rgb(255 255 255 / 0.08), 0 18px 40px rgb(0 0 0 / 0.45);
+  --shadow-panel-hover: 0 0 0 1px rgb(255 255 255 / 0.13), 0 18px 40px rgb(0 0 0 / 0.5);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-micro: 80ms;
+  --motion-quick: 150ms;
+  --motion-fast: 250ms;
+  --motion-medium: 350ms;
+  --motion-slow: 400ms;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  body {
+    min-height: 100dvh;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  input[type="range"] {
+    accent-color: var(--color-accent);
+  }
+}
+
+@layer components {
+  .panel {
+    background: color-mix(in oklab, var(--color-surface) 88%, transparent);
+    box-shadow: var(--shadow-panel);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .map-vignette {
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 58%,
+      color-mix(in oklab, var(--color-bg) 48%, transparent) 100%
+    );
+  }
+
+  .live-dot {
+    animation: live-pulse 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes live-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
